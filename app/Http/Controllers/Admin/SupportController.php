@@ -28,12 +28,34 @@ class SupportController extends Controller
         return redirect()->route('supports.index');
     }
 
-    public function show($id)
+    public function show($id, Support $support)
     {
-        if (! $support = Support::find($id)) {
+        if (! $support = $support->find($id)) {
             return redirect()->back();
         }
 
         return view('admin.supports.show', compact('support'));
+    }
+
+    public function edit($id, Support $support)
+    {
+        if (! $support = $support->find($id)) {
+            return redirect()->back();
+        }
+
+        return view('admin.supports.edit', compact('support'));
+    }
+
+    public function update(Request $request, Support $support, $id)
+    {
+        if (! $support = $support->find($id)) {
+            return redirect()->back();
+        }
+
+        $support->update($request->only([
+            'subject', 'message',
+            ])
+        );
+        return redirect()->route('supports.index');
     }
 }

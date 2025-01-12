@@ -17,6 +17,7 @@
                 <td>{{ $support->message }}</td>
                 <td>
                     <a href="{{ route('supports.show', $support->id) }}">Ver</a>
+                    <a href="{{ route('supports.edit', $support->id) }}">Editar</a>
                 </td>
             </tr>
         @endforeach
