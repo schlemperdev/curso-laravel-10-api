@@ -1,6 +1,8 @@
 <h1>Lista de Suportes</h1>
 
-<table>
+<a href="{{ route('supports.create') }}">Criar Nova Dúvida</a>
+
+<table style="padding-top: 20px">
     <thead>
         <th>Assunto</th>
         <th>Status</th>

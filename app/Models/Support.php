@@ -9,6 +9,10 @@ class Support extends Model
 {
     use HasFactory;
 
-
+    protected $fillable = [
+        'subject',
+        'message',
+        'status'
+    ];
 
 }
