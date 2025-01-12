@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\SupportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('supports.index');
 });
 
 Route::get('/contact', [SiteController::class, 'contact']);
