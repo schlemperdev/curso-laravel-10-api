@@ -3,6 +3,16 @@
     <h1>Dúvida #{{ $support->id }}</h1>
     <h5>Status - {{ $support->status }}</h5>
 
+    @if ($errors->any())
+        <div class="alert alert-danger" style="margin-top: 20px">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('supports.update', $support->id) }}" method="POST">
         @csrf
         @method('PUT')
