@@ -5,7 +5,7 @@
                 Dúvida #{{ $support->id }} - Status: {{ $support->status }}
             </div>
             <ul>
-                <li style="h5">Assunto: {{ $support->subject }}</li>
+                <li>Assunto: {{ $support->subject }}</li>
                 <li>Mensagem: {{ $support->message }}</li>
             </ul>
             <div class="card-body">
