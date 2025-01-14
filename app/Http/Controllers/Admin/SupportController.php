@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateSupport;
 use App\Models\Support;
-use App\Services\SupportService;
+use App\Services\SupportServices;
 use Illuminate\Support\Facades\Request;
 
 class SupportController extends Controller
 {
     public function __construct(
-        protected SupportService $service
+        protected SupportServices $service
     ) {}
 
     public function index(Request $request)
@@ -26,10 +26,11 @@ class SupportController extends Controller
         return view('admin.supports.create');
     }
 
-    public function store(StoreUpdateSupport $request, Support $support) // fazer depois com o DTO
+    public function store(StoreUpdateSupport $request)
     {
-        $support['status'] = 'open';
-        $support->create($request->validated());
+        $this->service->new(
+            CreateSupportDTO::fromRequest($request)
+        );
 
         return redirect()->route('supports.index');
     }
@@ -52,13 +53,15 @@ class SupportController extends Controller
         return view('admin.supports.edit', compact('support'));
     }
 
-    public function update(StoreUpdateSupport $request, Support $support, $id) //fazer depois com o DTO
+    public function update(StoreUpdateSupport $request)
     {
-        if (! $support = $support->find($id)) {
+        $support = $this->service->update(
+            UpdateSupportDTO::fromRequest($request)
+        );
+
+        if (!$support) {
             return redirect()->back();
         }
-
-        $support->update($request->validated());
 
         return redirect()->route('supports.index');
     }
