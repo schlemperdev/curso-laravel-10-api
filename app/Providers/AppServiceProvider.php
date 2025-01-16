@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             SupportRepositoryInterface::class,
-            SupportEloquentORM::class
+            SupportEloquentORM::class,
         );
     }
 

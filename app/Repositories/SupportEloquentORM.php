@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Repositories;
+
 use App\DTOs\CreateSupportDTO;
 use App\DTOs\UpdateSupportDTO;
 use App\Models\Support;
@@ -22,7 +24,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
                             ->orWhere('message', 'like', "%{$filter}%");
                         }
                     })
-                    ->all()
+                    ->get()
                     ->toArray();
     }
 
@@ -37,31 +39,27 @@ class SupportEloquentORM implements SupportRepositoryInterface
         return (object) $support->toArray();
     }
 
-/*  FIX THESE LINES--------------------------------------------
-
     public function new(CreateSupportDTO $dto): stdClass
     {
-        $support = new Support();
-        $support->name = $dto->name;
-        $support->email = $dto->email;
-        $support->phone = $dto->phone;
-        $support->save();
+        $support = $this->model->create(
+            (array) $dto
+        );
 
-        return $support;
+        return (object) $support->toArray();
     }
 
     public function update(UpdateSupportDTO $dto): stdClass|null
     {
-        $support = Support::find($dto->id);
-        $support->name = $dto->name;
-        $support->email = $dto->email;
-        $support->phone = $dto->phone;
-        $support->save();
+        if (!$support = $this->model->find($dto->id)){
+            return null;
+        }
 
-        return $support;
+        $support->update(
+            (array) $dto
+        );
+
+        return (object) $support->toArray();
     }
-
-    FIX THESE LINES --------------------------------------------*/
 
     public function delete(string $id): void
     {
