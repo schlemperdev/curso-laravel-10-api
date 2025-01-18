@@ -14,10 +14,10 @@ class UpdateSupportDTO
         public SupportStatusEnum $status,
     ) {}
 
-    public static function fromRequest(StoreUpdateSupport $request): self
+    public static function fromRequest(StoreUpdateSupport $request, $id = null): self
     {
         return new self(
-            $request->id,
+            $id ?? $request->id,
             $request->subject,
             $request->message,
             SupportStatusEnum::OPEN,
