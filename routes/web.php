@@ -1,8 +1,8 @@
 <?php
 
-use App\ENUM\SupportStatusEnum;
 use App\Http\Controllers\Site\SiteController;
 use App\Http\Controllers\Admin\SupportController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 //HOME
@@ -29,5 +29,5 @@ Route::delete('/supports/{id}', [SupportController::class, 'destroy']) -> name('
 
 //TESTE
 Route::get('/test', function (){
-    dd();
+
 });

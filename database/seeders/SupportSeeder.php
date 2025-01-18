@@ -16,7 +16,7 @@ class SupportSeeder extends Seeder
         Support::create([
             'subject' => 'Test Support',
             'message' => 'test message',
-            'status' => 'open',
+            'status' => 'OPEN',
         ]);
     }
 }

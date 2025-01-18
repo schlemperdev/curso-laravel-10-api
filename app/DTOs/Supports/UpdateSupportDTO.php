@@ -1,23 +1,26 @@
 <?php
 
-namespace App\DTOs;
+namespace App\DTOs\Supports;
 
+use App\ENUM\SupportStatusEnum;
 use App\Http\Requests\StoreUpdateSupport;
 
-class CreateSupportDTO
+class UpdateSupportDTO
 {
     public function __construct(
+        public string $id,
         public string $subject,
         public string $message,
-        public string $status,
+        public SupportStatusEnum $status,
     ) {}
 
     public static function fromRequest(StoreUpdateSupport $request): self
     {
         return new self(
-            subject: $request->subject,
-            message: $request->message,
-            status: 'open',
+            $request->id,
+            $request->subject,
+            $request->message,
+            SupportStatusEnum::OPEN,
         );
     }
 }
